@@ -1,0 +1,7 @@
+export(idf.create)
+export(s.linlir)
+S3method(summary,idf)
+S3method(plot,idf)
+S3method(print,s.linlir)
+S3method(summary,s.linlir)
+S3method(plot,s.linlir)

@@ -1,0 +1,109 @@
+\name{s.linlir}
+\alias{s.linlir}
+\alias{print.s.linlir}
+\alias{summary.s.linlir}
+\alias{plot.s.linlir}
+\title{
+Simple linear Likelihood-based Imprecise Regression
+}
+\description{
+Conducts a LIR analysis for two variables with interval-valued observations whose relation is assumed to be linear. 
+}
+\usage{
+s.linlir(dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
+
+\method{print}{s.linlir}(x.s.linlir)
+\method{summary}{s.linlir}(x.s.linlir)
+\method{plot}{s.linlir}(x.s.linlir, typ, para.typ = "polygon", b.range = c(-1e-05, 1e-05), b.grid = 1000, nb.func = 1000, seed.func = NULL, pl.lrm = TRUE, pl.band = FALSE, pl.dat = FALSE, k.x = 1, k.y = 1, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = " ", y.lab = " ")
+}
+\arguments{
+  \item{dat.idf}{
+The \emph{idf}-object to be analyzed.
+}
+  \item{var}{
+Names of the two variables out of the \emph{idf}-object to be analyzed.
+}
+  \item{p}{
+Quantile of the abolute residuals' distribution to be used as loss function in the LIR analysis. $0.5$ corresponds to the median.
+}
+  \item{bet}{
+Cutoff-point for the normalized profile likelihood function.
+}
+  \item{epsilon}{
+Fraction of errors considered.
+}
+  \item{b.grid}{
+Particular parameter of the internal function undom.para determining the undominated parameter combinations.
+}
+  \item{x.s.linlir}{
+The \emph{s.linlir}-object of a simple linear LIR analysis. 
+}
+  \item{typ}{Type of plot. Possible values are "para": plot undominated parameter set, "lrm": plot f.lrm, "func": plot undominated regression functions.
+}
+  \item{para.typ}{Options for plot of typ="para" are "polygon" (default) or "points" (approximation).
+}
+  \item{b.range}{Considered interval of slopes for plots of typ="para". If default is chosen, then x.lim ist taken as b.range.
+}
+  \item{nb.func}{Number of (randomly chosen) plotted undominated lines for plots of typ="func".}
+  \item{seed.func=NULL}{Set seed for the random selection of plotted regression lines for plots of typ="func". (Optional)}
+  \item{pl.lrm}{Logical for plots of typ=c("para","func"). If pl.lrm=TRUE (default), f.lrm is highlighted in the plot.}
+  \item{pl.band=FALSE}{Logical for plots of typ="func". If pl.band=TRUE, the band around f.lrm is added to the plot.}
+  \item{pl.dat=FALSE}{Logical for plots of typ=c("lrm","func"). If pl.dat=TRUE, the data are plotted in the background of the plot.}
+  \item{k.x}{
+Particular plot function parameter. $\frac{1}{k.x}$ is the step width along the abscissa.
+}
+  \item{k.y}{
+Particular plot function parameter. $\frac{1}{k.y}$ is the step width along the ordinate.
+}
+  \item{x.lim}{
+The limits for the abscissa of the plot.
+}
+  \item{y.lim}{
+The limits for the ordinate of the plot.
+}
+  \item{x.lab}{
+Title of the abscissa.
+}
+  \item{y.lab}{
+Title of the ordinate.
+}
+}
+\value{
+An \emph{s.linlir}-object, which is a list containing the following components:
+\item{f.lrm}{Intercept and slope of the Likelihood-based Region Minimax (LRM) line(s).}
+\item{q.lrm}{Value of the p-quantile of the absolute residuals associated with the LRM line(s).}
+\item{a.undom}{Range of intercept values of the undominated regression lines.}
+\item{b.undom}{Range of slope values of the undominated regression lines.}
+\item{undom.para}{A matrix of undominated parameter combinations approximating the entire set of parameters corresponding to the set of undominated regression lines.}
+\item{config}{A list containing information about the settings of the LIR analysis.}
+\item{dat}{An $n\times 4$ data.frame containing the imprecise data of the analyzed variables. Columns 1 and 2 correspond to the interval-valued observations of the regressor variable, columns 3 and 4 to those of the dependent variable.}
+\item{n}{Number of observations.}
+\item{call}{Call of the function s.linlir.}
+
+}
+\references{
+A. Wiencierz, M. Cattaneo (2012). An exact algorithm for Likelihood-based Imprecise Regression in the case of simple linear regression with interval data. (Accepted for the 6th International Conference on Soft Methods in Probability and Statistics (SMPS 2012). Publication in the series Advances in Intelligent and Soft Computing. Springer-Verlag.)
+
+M. Cattaneo, A. Wiencierz (2012). Likelihood-based Imprecise Regression. (Accepted for publication in the International Journal of Approximate Reasoning. A preliminary version of the paper is available as a research report at: \url{http://epub.ub.uni-muenchen.de/12450/}.)
+}
+\seealso{
+\code{\link{idf}},
+\code{\link{gen.lms}},
+\code{\link{kl.ku}},
+\code{\link{undom}}
+}
+\examples{
+data(toy.smps)
+toy.idf <- idf.create(toy.smps, var.labels=c("x","y"))
+
+test <- s.linlir(toy.idf, bet=0.5)
+test
+
+summary(test)
+
+plot(test, typ="para")
+plot(test, typ="func")
+plot(test, typ="func", pl.lrm=FALSE)
+plot(test, typ="lrm")
+plot(test, typ="lrm", pl.dat=TRUE, pl.band=TRUE, k.x=10, k.y=10)
+}
