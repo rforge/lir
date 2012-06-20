@@ -4,17 +4,17 @@
 Finding Likelihood-based Region Minimax (LRM) line(s)
 }
 \description{
-Function within the s.linlir-function that determines the Likelihood-based Region Minimax (LRM) line(s).
+Function within the \code{s.linlir}-function that determines the Likelihood-based Region Minimax (LRM) line(s).
 }
 \usage{
 gen.lms(dat, p = 0.5, bet, epsilon = 0, k.u = 0)
 }
 \arguments{
   \item{dat}{
-An $n\times 4$ data.frame containing the imprecise data of the analyzed variables. Columns 1 and 2 correspond to the interval-valued observations of the regressor variable, columns 3 and 4 to those of the dependent variable.
+An \code{n}x4 \code{data.frame} containing the imprecise data of the analyzed variables. Columns 1 and 2 correspond to the interval-valued observations of the regressor variable, columns 3 and 4 to those of the dependent variable.
 }
   \item{p}{
-Quantile of the abolute residuals' distribution to be used as loss function in the LIR analysis. $0.5$ corresponds to the median.
+Quantile of the abolute residuals' distribution to be used as loss function in the LIR analysis. (0.5 corresponds to the median.)
 }
   \item{bet}{
 Cutoff-point for the normalized profile likelihood function.
@@ -23,7 +23,7 @@ Cutoff-point for the normalized profile likelihood function.
 Fraction of errors considered.
 }
   \item{k.u}{
-As default k.u is calculated on the basis of p, bet and epsilon.
+As default \code{k.u} is calculated on the basis of \code{p}, \code{bet} and \code{epsilon}.
 }
 }
 \details{

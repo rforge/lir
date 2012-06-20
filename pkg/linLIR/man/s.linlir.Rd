@@ -7,7 +7,7 @@
 Simple linear Likelihood-based Imprecise Regression
 }
 \description{
-Conducts a LIR analysis for two variables with interval-valued observations whose relation is assumed to be linear. 
+Conducts a LIR analysis for 2 variables with interval-valued observations whose relation is assumed to be linear. 
 }
 \usage{
 s.linlir(dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
@@ -18,13 +18,13 @@ s.linlir(dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
 }
 \arguments{
   \item{dat.idf}{
-The \emph{idf}-object to be analyzed.
+The \code{idf}-object to be analyzed.
 }
   \item{var}{
-Names of the two variables out of the \emph{idf}-object to be analyzed.
+Names of the two variables out of the \code{idf}-object to be analyzed.
 }
   \item{p}{
-Quantile of the abolute residuals' distribution to be used as loss function in the LIR analysis. $0.5$ corresponds to the median.
+Quantile of the abolute residuals' distribution to be used as loss function in the LIR analysis. (0.5 corresponds to the median.)
 }
   \item{bet}{
 Cutoff-point for the normalized profile likelihood function.
@@ -36,24 +36,24 @@ Fraction of errors considered.
 Particular parameter of the internal function undom.para determining the undominated parameter combinations.
 }
   \item{x.s.linlir}{
-The \emph{s.linlir}-object of a simple linear LIR analysis. 
+The \code{s.linlir}-object of a simple linear LIR analysis. 
 }
-  \item{typ}{Type of plot. Possible values are "para": plot undominated parameter set, "lrm": plot f.lrm, "func": plot undominated regression functions.
+  \item{typ}{Type of the plot. Possible values are \code{"para"}: plot undominated parameter set, \code{"lrm"}: plot \code{f.lrm}, \code{"func"}: plot undominated regression functions.
 }
-  \item{para.typ}{Options for plot of typ="para" are "polygon" (default) or "points" (approximation).
+  \item{para.typ}{Options for plot of \code{typ="para"} are \code{"polygon"} (default) or \code{"points"} (approximation).
 }
-  \item{b.range}{Considered interval of slopes for plots of typ="para". If default is chosen, then x.lim ist taken as b.range.
+  \item{b.range}{Considered interval of slopes for plots of \code{typ="para"}. If default is chosen, then \code{x.lim} ist taken as \code{b.range}.
 }
-  \item{nb.func}{Number of (randomly chosen) plotted undominated lines for plots of typ="func".}
-  \item{seed.func=NULL}{Set seed for the random selection of plotted regression lines for plots of typ="func". (Optional)}
-  \item{pl.lrm}{Logical for plots of typ=c("para","func"). If pl.lrm=TRUE (default), f.lrm is highlighted in the plot.}
-  \item{pl.band=FALSE}{Logical for plots of typ="func". If pl.band=TRUE, the band around f.lrm is added to the plot.}
-  \item{pl.dat=FALSE}{Logical for plots of typ=c("lrm","func"). If pl.dat=TRUE, the data are plotted in the background of the plot.}
+  \item{nb.func}{Number of (randomly chosen) plotted undominated lines for plots of \code{typ="func"}.}
+  \item{seed.func}{Set seed for the random selection of plotted regression lines for plots of \code{typ="func"}. (Optional)}
+  \item{pl.lrm}{Logical for plots of \code{typ=c("para","func")}. If \code{pl.lrm=TRUE} (default), \code{f.lrm} is highlighted in the plot.}
+  \item{pl.band}{Logical for plots of \code{typ="func"}. If \code{pl.band=TRUE}, the band around \code{f.lrm} is added to the plot.}
+  \item{pl.dat}{Logical for plots of \code{typ=c("lrm","func")}. If \code{pl.dat=TRUE}, the data are plotted in the background of the plot.}
   \item{k.x}{
-Particular plot function parameter. $\frac{1}{k.x}$ is the step width along the abscissa.
+Particular plot function parameter. 1/\code{k.x} is the step width along the abscissa.
 }
   \item{k.y}{
-Particular plot function parameter. $\frac{1}{k.y}$ is the step width along the ordinate.
+Particular plot function parameter. 1/\code{k.y} is the step width along the ordinate.
 }
   \item{x.lim}{
 The limits for the abscissa of the plot.
@@ -69,16 +69,15 @@ Title of the ordinate.
 }
 }
 \value{
-An \emph{s.linlir}-object, which is a list containing the following components:
 \item{f.lrm}{Intercept and slope of the Likelihood-based Region Minimax (LRM) line(s).}
 \item{q.lrm}{Value of the p-quantile of the absolute residuals associated with the LRM line(s).}
 \item{a.undom}{Range of intercept values of the undominated regression lines.}
 \item{b.undom}{Range of slope values of the undominated regression lines.}
 \item{undom.para}{A matrix of undominated parameter combinations approximating the entire set of parameters corresponding to the set of undominated regression lines.}
 \item{config}{A list containing information about the settings of the LIR analysis.}
-\item{dat}{An $n\times 4$ data.frame containing the imprecise data of the analyzed variables. Columns 1 and 2 correspond to the interval-valued observations of the regressor variable, columns 3 and 4 to those of the dependent variable.}
+\item{dat}{An \code{n}x4 \code{data.frame} containing the imprecise data of the analyzed variables. Columns 1 and 2 correspond to the interval-valued observations of the regressor variable, columns 3 and 4 to those of the dependent variable.}
 \item{n}{Number of observations.}
-\item{call}{Call of the function s.linlir.}
+\item{call}{Call of the function \code{s.linlir}.}
 
 }
 \references{
@@ -93,7 +92,7 @@ M. Cattaneo, A. Wiencierz (2012). Likelihood-based Imprecise Regression. (Accept
 \code{\link{undom}}
 }
 \examples{
-data(toy.smps)
+data('toy.smps')
 toy.idf <- idf.create(toy.smps, var.labels=c("x","y"))
 
 test <- s.linlir(toy.idf, bet=0.5)
