@@ -4,7 +4,7 @@
 Finding \code{k.l} and \code{k.u}
 }
 \description{
-Internal function to determine the quantities \code{k.l} and \code{k.u} on the basis of \code{n}, \code{p}, \code{bet}. This function is used within the 
+Internal function to determine the quantities \code{k.l} and \code{k.u} on the basis of \code{n}, \code{p}, \code{bet}. This function is used within the (internal) functions \code{gen.lms}, \code{undom.a} and \code{undom.para}.
 }
 \usage{
 kl.ku(n, p = 0.5, bet, epsilon = 0)
@@ -33,5 +33,5 @@ M. Cattaneo, A. Wiencierz (2012). Likelihood-based Imprecise Regression. (Accept
 \seealso{
 \code{\link{s.linlir}},
 \code{\link{gen.lms}},
-\code{\link{undom}}
+\code{\link{undom.para}}
 }

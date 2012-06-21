@@ -86,10 +86,10 @@ A. Wiencierz, M. Cattaneo (2012). An exact algorithm for Likelihood-based Imprec
 M. Cattaneo, A. Wiencierz (2012). Likelihood-based Imprecise Regression. (Accepted for publication in the International Journal of Approximate Reasoning. A preliminary version of the paper is available as a research report at: \url{http://epub.ub.uni-muenchen.de/12450/}.)
 }
 \seealso{
-\code{\link{idf}},
+\code{\link{idf.create}},
 \code{\link{gen.lms}},
 \code{\link{kl.ku}},
-\code{\link{undom}}
+\code{\link{undom.para}}
 }
 \examples{
 data('toy.smps')

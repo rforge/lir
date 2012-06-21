@@ -53,7 +53,7 @@ Within the LIR framework all types of interval data are possible, including the 
 }
 \value{
 An \code{idf}-object of \code{m} variables, which is a list of \code{m+1} entries.
-\item{Var1 ... varm}{\code{m} \code{data.frame} with 2 columns each, one for each of the 1st to \code{m}th variables.}
+\item{Var1 ... varm}{\code{m} different \code{data.frame}s with 2 columns each, one for each of the 1st to \code{m}th variables.}
 \item{n}{Number of observations.}
 }
 \references{

@@ -46,5 +46,5 @@ J. Steele, W. Steiger (1986). Algorithms and complexity for least median of squa
 \seealso{
 \code{\link{s.linlir}},
 \code{\link{kl.ku}},
-\code{\link{undom}}
+\code{\link{undom.para}}
 }
