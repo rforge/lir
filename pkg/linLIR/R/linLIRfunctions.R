@@ -1,7 +1,6 @@
 ### idf.create()
 
 # Create Interval Data Frame -> Object of class "idf"
-# for us, it doesn't matter, if the intervals are closed because we use supremum
 
 idf.create <- function (dat, var.labels = NULL){
   
@@ -40,7 +39,9 @@ idf.create <- function (dat, var.labels = NULL){
 
 ### summary.idf()
 
-summary.idf <- function(dat.idf){
+summary.idf <- function(object, ...){
+  dat.idf <- object
+  
   cat("\nSummary of interval data frame\n\n")  
   cat(dat.idf$n, "observations\n")
   cat((length(dat.idf)-1), "interval-valued variables \n")
@@ -57,7 +58,9 @@ summary.idf <- function(dat.idf){
 
 # Funktion, um einen Skizzenplot des Datensatzes zu erstellen: unbeschränkte Daten tauchen nicht auf...
 
-plot.idf <- function(dat.idf, var=NULL, k.x=1, k.y=1, x.lim=c(0,0), y.lim=c(0,0), x.lab="X", y.lab="Y"){
+plot.idf <- function(x, y = NULL, ..., var=NULL, k.x=1, k.y=1, x.lim=c(0,0), y.lim=c(0,0), x.lab="X", y.lab="Y"){
+  
+  dat.idf <- x
   
   if(!is.null(var)){
     dat <- cbind(dat.idf[[which(names(dat.idf)==var[1])]],dat.idf[[which(names(dat.idf)==var[2])]])
@@ -622,7 +625,10 @@ s.linlir <- function(dat.idf, var=NULL, p=0.5, bet, epsilon=0, b.grid=1000){  # 
 
 ### print.s.linlir()
 
-print.s.linlir <- function(x.s.linlir){
+print.s.linlir <- function(x, ...){
+  
+  x.s.linlir <- x
+  
   cat("\nSimple linear LIR analysis\n")
   cat("\nCall:\n")
   print(x.s.linlir$call)
@@ -634,7 +640,10 @@ print.s.linlir <- function(x.s.linlir){
 
 ### summary.s.linlir()
 
-summary.s.linlir <- function(x.s.linlir){
+summary.s.linlir <- function(object, ...){
+  
+  x.s.linlir <- object
+  
   cat("\nSimple linear LIR analysis results \n")
   cat("\nCall:\n")
   print(x.s.linlir$call)
@@ -662,8 +671,10 @@ summary.s.linlir <- function(x.s.linlir){
 
 ### plot.s.linlir()
 
-plot.s.linlir <- function(x.s.linlir, typ, para.typ="polygon", b.range=c(-1e-05,1e-05), b.grid=1000, nb.func=1000, seed.func=NULL,
+plot.s.linlir <- function(x, y=NULL, ..., typ, para.typ="polygon", b.range=c(-1e-05,1e-05), b.grid=1000, nb.func=1000, seed.func=NULL,
                           pl.lrm=TRUE, pl.band=FALSE, pl.dat=FALSE, k.x=1, k.y=1, x.lim=c(0,0), y.lim=c(0,0), x.lab=" ", y.lab=" "){
+  
+  x.s.linlir <- x
   
   if(typ=="para"){
     

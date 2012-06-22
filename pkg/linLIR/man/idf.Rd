@@ -11,8 +11,8 @@ Create an interval data frame (\code{idf}-object), summarize its content and vis
 \usage{
 idf.create(dat, var.labels = NULL)
 
-\method{summary}{idf}(dat.idf)
-\method{plot}{idf}(dat.idf, var = NULL, k.x = 1, k.y = 1, x.lim = c(0,0), y.lim = c(0,0), x.lab = "X", y.lab = "Y")
+\method{summary}{idf}(object, ...)
+\method{plot}{idf}(x, y=NULL, ..., var = NULL, k.x = 1, k.y = 1, x.lim = c(0,0), y.lim = c(0,0), x.lab = "X", y.lab = "Y")
 }
 \arguments{
   \item{dat}{

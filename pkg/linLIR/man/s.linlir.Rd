@@ -12,9 +12,9 @@ Conducts a LIR analysis for 2 variables with interval-valued observations whose 
 \usage{
 s.linlir(dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
 
-\method{print}{s.linlir}(x.s.linlir)
-\method{summary}{s.linlir}(x.s.linlir)
-\method{plot}{s.linlir}(x.s.linlir, typ, para.typ = "polygon", b.range = c(-1e-05, 1e-05), b.grid = 1000, nb.func = 1000, seed.func = NULL, pl.lrm = TRUE, pl.band = FALSE, pl.dat = FALSE, k.x = 1, k.y = 1, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = " ", y.lab = " ")
+\method{print}{s.linlir}(x, ...)
+\method{summary}{s.linlir}(object, ...)
+\method{plot}{s.linlir}(x, y=NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05, 1e-05), b.grid = 1000, nb.func = 1000, seed.func = NULL, pl.lrm = TRUE, pl.band = FALSE, pl.dat = FALSE, k.x = 1, k.y = 1, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = " ", y.lab = " ")
 }
 \arguments{
   \item{dat.idf}{
