@@ -22,8 +22,18 @@ A \code{data.frame} containing 2 neighboring columns for each variable, the firs
 Names of the variables corresponding to the interval-valued observations in the \code{data.frame}.
 }
 
-  \item{dat.idf}{
-The \code{idf}-object to be summarized or plotted.
+  \item{object}{
+The \code{idf}-object to be summarized.
+}
+  \item{...}{
+Argument of the generic functions \code{plot} and \code{summary}: Other parameters.
+}
+
+  \item{x}{
+Argument of the generic function \code{plot}. Here \code{x} is the \code{idf}-object to be plotted.
+}
+  \item{y}{
+Argument of the generic function \code{plot}. Here \code{y=NULL}.
 }
 
   \item{var}{

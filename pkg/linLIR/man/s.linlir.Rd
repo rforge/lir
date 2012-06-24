@@ -35,9 +35,23 @@ Fraction of errors considered.
   \item{b.grid}{
 Particular parameter of the internal function undom.para determining the undominated parameter combinations.
 }
-  \item{x.s.linlir}{
-The \code{s.linlir}-object of a simple linear LIR analysis. 
+
+  \item{x}{
+Argument of the generic functions \code{plot} and \code{print}. Here \code{x} is the \code{s.linlir}-object to be plotted or printed.
 }
+  \item{...}{
+Argument of the generic functions \code{plot}, \code{print} and \code{summary}: Other parameters.
+}
+
+\item{object}{
+The \code{s.linlir}-object to be summarized.
+}
+
+  \item{y}{
+Argument of the generic function \code{plot}. Here \code{y=NULL}.
+}
+
+
   \item{typ}{Type of the plot. Possible values are \code{"para"}: plot undominated parameter set, \code{"lrm"}: plot \code{f.lrm}, \code{"func"}: plot undominated regression functions.
 }
   \item{para.typ}{Options for plot of \code{typ="para"} are \code{"polygon"} (default) or \code{"points"} (approximation).
