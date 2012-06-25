@@ -12,9 +12,7 @@ Create an interval data frame (\code{idf}-object), summarize its content and vis
 idf.create(dat, var.labels = NULL)
 
 \method{summary}{idf}(object, ...)
-\method{plot}{idf}(x, y=NULL, ..., var = NULL, k.x = 1, k.y = 1, 
-p.cex = 1, x.adj = 0.5, x.padj = 3, y.las = 0, y.adj = 1, y.padj = 0, 
-x.lim = c(0, 0), y.lim = c(0, 0), x.lab = "X", y.lab = "Y"
+\method{plot}{idf}(x, y=NULL, ..., var = NULL, k.x = 1, k.y = 1,p.cex = 1, x.adj = 0.5, x.padj = 3, y.las = 0, y.adj = 1, y.padj = 0, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = "X", y.lab = "Y")
 }
 \arguments{
   \item{dat}{
