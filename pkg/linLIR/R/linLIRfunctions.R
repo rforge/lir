@@ -178,8 +178,9 @@ function (n, p = 0.5, bet, epsilon = 0)
     c(k.l, k.u)
 }
 plot.idf <-
-function (x, y = NULL, ..., var = NULL, k.x = 1, k.y = 1, x.lim = c(0, 
-    0), y.lim = c(0, 0), x.lab = "X", y.lab = "Y") 
+function (x, y = NULL, ..., var = NULL, k.x = 1, k.y = 1, p.cex = 1, 
+    x.adj = 0.5, x.padj = 3, y.las = 0, y.adj = 1, y.padj = 0, 
+    x.lim = c(0, 0), y.lim = c(0, 0), x.lab = "X", y.lab = "Y") 
 {
     dat.idf <- x
     if (!is.null(var)) {
@@ -227,8 +228,9 @@ function (x, y = NULL, ..., var = NULL, k.x = 1, k.y = 1, x.lim = c(0,
     }
     plot(mean(dat[, 1]), mean(dat[, 3]), type = "p", pch = 15, 
         col = 0, xlim = c(x.min, x.max), ylim = c(y.min, y.max), 
-        xlab = x.lab, ylab = " ", las = 1)
-    mtext(y.lab, side = 2, las = 1, adj = 6)
+        xlab = " ", ylab = " ", las = y.las)
+    mtext(x.lab, side = 1, las = 1, adj = x.adj, padj = x.padj)
+    mtext(y.lab, side = 2, las = y.las, adj = y.adj, padj = y.padj)
     for (i in 1:nrow(dat)) {
         if (x.steps[i] > 0 & y.steps[i] > 0) {
             Z.i <- matrix(0, nrow = (x.steps[i] * y.steps[i]), 
@@ -248,7 +250,7 @@ function (x, y = NULL, ..., var = NULL, k.x = 1, k.y = 1, x.lim = c(0,
                   dat[i, 4] - 1/(2 * k.y), 1/k.y), each = x.steps[i])
             }
             points(Z.i[, 1], Z.i[, 2], pch = 15, col = "lightgray", 
-                cex = 1.25)
+                cex = p.cex)
         }
         points(dat[i, 2], dat[i, 4], pch = 20, cex = 0.25)
         points(dat[i, 2], dat[i, 3], pch = 20, cex = 0.25)
@@ -268,7 +270,9 @@ plot.s.linlir <-
 function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05, 
     1e-05), b.grid = 1000, nb.func = 1000, seed.func = NULL, 
     pl.lrm = TRUE, pl.band = FALSE, pl.dat = FALSE, k.x = 1, 
-    k.y = 1, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = " ", y.lab = " ") 
+    k.y = 1, p.cex = 1, x.adj = 0.5, x.padj = 3, y.las = 0, y.adj = 1, 
+    y.padj = 0, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = " ", 
+    y.lab = " ") 
 {
     x.s.linlir <- x
     if (typ == "para") {
@@ -305,10 +309,18 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
                 a.l.plot[, i] <- a.int[[1]][, 1]
                 a.u.plot[, i] <- a.int[[1]][, 2]
             }
+            if (x.lab == " ") {
+                x.lab <- "b"
+            }
+            if (y.lab == " ") {
+                y.lab <- "a"
+            }
             plot(x.min, y.max, type = "n", xlim = c(x.min, x.max), 
-                ylim = c(y.min, y.max), xlab = x.lab, ylab = "", 
-                las = 1)
-            mtext(y.lab, side = 2, las = 1, adj = 6)
+                ylim = c(y.min, y.max), xlab = " ", ylab = " ", 
+                las = y.las)
+            mtext(x.lab, side = 1, las = 1, adj = x.adj, padj = x.padj)
+            mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
+                padj = y.padj)
             for (j in 1:(n - k.l)) {
                 polygon(c(b.pot[a.l.plot[j, ] <= a.u.plot[j, 
                   ]], rev(b.pot[a.l.plot[j, ] <= a.u.plot[j, 
@@ -321,9 +333,10 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             undom.para <- x.s.linlir$undom.para
             plot(undom.para[, 2], undom.para[, 1], pch = 19, 
                 col = "darkgrey", xlim = c(x.min, x.max), ylim = c(y.min, 
-                  y.max), xlab = x.lab, ylab = " ", las = 1, 
-                cex = 0.1)
-            mtext(y.lab, side = 2, las = 1, adj = 6)
+                  y.max), xlab = " ", ylab = " ", las = y.las)
+            mtext(x.lab, side = 1, las = 1, adj = x.adj, padj = x.padj)
+            mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
+                padj = y.padj)
         }
         if (pl.lrm == TRUE) {
             points(x.s.linlir$f.lrm[2], x.s.linlir$f.lrm[1], 
@@ -349,11 +362,20 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             y.max <- y.lim[2]
         }
         x.d <- (x.max - x.min)/10
+        if (x.lab == " ") {
+            x.lab <- "X"
+        }
+        if (y.lab == " ") {
+            y.lab <- "Y"
+        }
         if (typ == "lrm") {
             if (pl.dat == TRUE) {
                 dat.idf <- idf.create(dat)
-                plot.idf(dat.idf, var = NULL, k.x, k.y, x.lim = c(x.min, 
-                  x.max), y.lim = c(y.min, y.max), x.lab, y.lab)
+                plot(dat.idf, k.x = k.x, k.y = k.y, p.cex = p.cex, 
+                  x.adj = x.adj, x.padj = x.padj, y.las = y.las, 
+                  y.adj = y.adj, y.padj = y.padj, x.lim = c(x.min, 
+                    x.max), y.lim = c(y.min, y.max), x.lab = x.lab, 
+                  y.lab = y.lab)
                 curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
                   x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
                   col = 4, lwd = 2)
@@ -361,8 +383,11 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             else {
                 plot(min(dat[, 1]), max(dat[, 4]), type = "n", 
                   xlim = c(x.min, x.max), ylim = c(y.min, y.max), 
-                  xlab = x.lab, ylab = " ", las = 1)
-                mtext(y.lab, side = 2, las = 1, adj = 6)
+                  xlab = " ", ylab = " ", las = y.las)
+                mtext(x.lab, side = 1, las = 1, adj = x.adj, 
+                  padj = x.padj)
+                mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
+                  padj = y.padj)
                 curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
                   x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
                   col = 4, lwd = 2)
@@ -376,8 +401,11 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
                 nb.func), ]
             if (pl.dat == TRUE) {
                 dat.idf <- idf.create(dat)
-                plot.idf(dat.idf, var = NULL, k.x, k.y, x.lim = c(x.min, 
-                  x.max), y.lim = c(y.min, y.max), x.lab, y.lab)
+                plot(dat.idf, k.x = k.x, k.y = k.y, p.cex = p.cex, 
+                  x.adj = x.adj, x.padj = x.padj, y.las = y.las, 
+                  y.adj = y.adj, y.padj = y.padj, x.lim = c(x.min, 
+                    x.max), y.lim = c(y.min, y.max), x.lab = x.lab, 
+                  y.lab = y.lab)
                 for (i in 1:nrow(undom)) {
                   curve(undom[i, 1] + undom[i, 2] * x, x.min - 
                     x.d, x.max + x.d, add = T, lty = 1, col = "darkgrey")
@@ -386,8 +414,11 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             else {
                 plot(min(dat[, 1]), max(dat[, 4]), type = "n", 
                   xlim = c(x.min, x.max), ylim = c(y.min, y.max), 
-                  xlab = x.lab, ylab = " ", las = 1)
-                mtext(y.lab, side = 2, las = 1, adj = 6)
+                  xlab = " ", ylab = " ", las = y.las)
+                mtext(x.lab, side = 1, las = 1, adj = x.adj, 
+                  padj = x.padj)
+                mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
+                  padj = y.padj)
                 for (i in 1:nrow(undom)) {
                   curve(undom[i, 1] + undom[i, 2] * x, x.min - 
                     x.d, x.max + x.d, add = T, lty = 1, col = "darkgrey")

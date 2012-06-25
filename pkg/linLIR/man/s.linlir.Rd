@@ -14,7 +14,7 @@ s.linlir(dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
 
 \method{print}{s.linlir}(x, ...)
 \method{summary}{s.linlir}(object, ...)
-\method{plot}{s.linlir}(x, y=NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05, 1e-05), b.grid = 1000, nb.func = 1000, seed.func = NULL, pl.lrm = TRUE, pl.band = FALSE, pl.dat = FALSE, k.x = 1, k.y = 1, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = " ", y.lab = " ")
+\method{plot}{s.linlir}(x, y=NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05, 1e-05), b.grid = 1000, nb.func = 1000, seed.func = NULL, pl.lrm = TRUE, pl.band = FALSE, pl.dat = FALSE, k.x = 1, k.y = 1, p.cex = 1, x.adj = 0.5, x.padj = 3, y.las = 0, y.adj = 1, y.padj = 0, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = " ", y.lab = " ")
 }
 \arguments{
   \item{dat.idf}{
@@ -69,6 +69,26 @@ Particular plot function parameter. 1/\code{k.x} is the step width along the abs
   \item{k.y}{
 Particular plot function parameter. 1/\code{k.y} is the step width along the ordinate.
 }
+
+  \item{p.cex}{
+Particular plot function parameter. \code{p.cex} is the point size to fill the rectangles with grey color.
+}
+  \item{x.adj}{
+Horizontal position of the text for the abscissa. 
+}
+  \item{x.padj}{
+Vertical position of the text for the abscissa. 
+}
+  \item{y.las}{
+Orientation of the text for the ordinate. \code{y.las=1} will turn the axis labels and the text in reading direction.
+}
+  \item{y.adj}{
+\code{y.adj} regulates the position of the text for the ordinate in reading direction, i.e. if \code{y.las=0} it sets the vertical position and if \code{y.las=1} the horizontal position.
+}
+  \item{y.padj}{
+\code{y.padj} regulates the position of the text for the ordinate orthogonal to the reading direction, i.e. if \code{y.las=0} it sets the horizontal position and if \code{y.las=1} the vertical position.
+}
+
   \item{x.lim}{
 The limits for the abscissa of the plot.
 }
@@ -114,9 +134,7 @@ test
 
 summary(test)
 
-plot(test, typ="para")
-plot(test, typ="func")
-plot(test, typ="func", pl.lrm=FALSE)
-plot(test, typ="lrm")
-plot(test, typ="lrm", pl.dat=TRUE, pl.band=TRUE, k.x=10, k.y=10)
+plot(test, typ="para", x.adj=0.7, y.las=1, y.adj=6, y.padj=-3)
+plot(test, typ="func", pl.lrm=FALSE, x.adj=0.7, y.adj=0.7, y.padj=-3)
+plot(test, typ="lrm", pl.dat=TRUE, pl.band=TRUE, k.x=10, k.y=10, y.las=1, y.adj=6)
 }

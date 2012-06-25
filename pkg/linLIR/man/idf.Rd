@@ -12,7 +12,9 @@ Create an interval data frame (\code{idf}-object), summarize its content and vis
 idf.create(dat, var.labels = NULL)
 
 \method{summary}{idf}(object, ...)
-\method{plot}{idf}(x, y=NULL, ..., var = NULL, k.x = 1, k.y = 1, x.lim = c(0,0), y.lim = c(0,0), x.lab = "X", y.lab = "Y")
+\method{plot}{idf}(x, y=NULL, ..., var = NULL, k.x = 1, k.y = 1, 
+p.cex = 1, x.adj = 0.5, x.padj = 3, y.las = 0, y.adj = 1, y.padj = 0, 
+x.lim = c(0, 0), y.lim = c(0, 0), x.lab = "X", y.lab = "Y"
 }
 \arguments{
   \item{dat}{
@@ -45,6 +47,26 @@ Particular plot function parameter. 1/\code{k.x} is the step width along the abs
   \item{k.y}{
 Particular plot function parameter. 1/\code{k.y} is the step width along the ordinate.
 }
+
+  \item{p.cex}{
+Particular plot function parameter. \code{p.cex} is the point size to fill the rectangles with grey color.
+}
+  \item{x.adj}{
+Horizontal position of the text for the abscissa. 
+}
+  \item{x.padj}{
+Vertical position of the text for the abscissa. 
+}
+  \item{y.las}{
+Orientation of the text for the ordinate. \code{y.las=1} will turn the axis labels and the text in reading direction.
+}
+  \item{y.adj}{
+\code{y.adj} regulates the position of the text for the ordinate in reading direction, i.e. if \code{y.las=0} it sets the vertical position and if \code{y.las=1} the horizontal position.
+}
+  \item{y.padj}{
+\code{y.padj} regulates the position of the text for the ordinate orthogonal to the reading direction, i.e. if \code{y.las=0} it sets the horizontal position and if \code{y.las=1} the vertical position.
+}
+
   \item{x.lim}{
 The limits for the abscissa of the plot.
 }
@@ -77,5 +99,8 @@ toy.idf <- idf.create(toy.smps, var.labels=c("x","y"))
 
 summary(toy.idf)
 
-plot(toy.idf, k.x=10, k.y=10)
+plot(toy.idf, k.x=10, k.y=10, p.cex=1.5, y.las=1, y.adj=6) 
+plot(toy.idf, k.x=10, k.y=10, x.adj=0.7, y.las=1, y.adj=6, y.padj=-3)
+plot(toy.idf, k.x=10, k.y=10, x.adj=0.7, x.padj=4, y.adj=0.7, y.padj=-4)
+
 }
