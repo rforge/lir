@@ -1,0 +1,6 @@
+# ToDo for linLIR:
+
+- korrigierte linLIRfunctions.R hochladen
+- plot.s.linlir anpassen für mehrere f.lrm
+- pm-Datensatz aufnehmen (inkl. Dokumentation !)
+
