@@ -2,5 +2,6 @@
 
 - korrigierte linLIRfunctions.R hochladen
 - plot.s.linlir anpassen für mehrere f.lrm
+- q.rlm in summary aufnehmen?
 - pm-Datensatz aufnehmen (inkl. Dokumentation !)
 
