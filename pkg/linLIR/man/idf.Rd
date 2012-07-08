@@ -87,9 +87,11 @@ An \code{idf}-object of \code{m} variables, which is a list of \code{m+1} entrie
 \item{n}{Number of observations.}
 }
 \references{
+M. Cattaneo, A. Wiencierz (2012). On the implementation of LIR: the case of simple linear regression with interval data. Technical Report No. 127. Department of Statistics. LMU Munich.
+
 A. Wiencierz, M. Cattaneo (2012). An exact algorithm for Likelihood-based Imprecise Regression in the case of simple linear regression with interval data. (Accepted for the 6th International Conference on Soft Methods in Probability and Statistics (SMPS 2012). Publication in the series Advances in Intelligent and Soft Computing. Springer-Verlag.)
 
-M. Cattaneo, A. Wiencierz (2012). Likelihood-based Imprecise Regression. (Accepted for publication in the International Journal of Approximate Reasoning. A preliminary version of the paper is available as a research report at: \url{http://epub.ub.uni-muenchen.de/12450/}.)
+M. Cattaneo, A. Wiencierz (2012). Likelihood-based Imprecise Regression. International Journal of Approximate Reasoning. In Press. (Uncorrected Proof: \url{http://www.sciencedirect.com/science/article/pii/S0888613X12000862})
 }
 \examples{
 data('toy.smps')
@@ -101,4 +103,10 @@ plot(toy.idf, k.x=10, k.y=10, p.cex=1.5, y.las=1, y.adj=6)
 plot(toy.idf, k.x=10, k.y=10, x.adj=0.7, y.las=1, y.adj=6, y.padj=-3)
 plot(toy.idf, k.x=10, k.y=10, x.adj=0.7, x.padj=4, y.adj=0.7, y.padj=-4)
 
+data('pm10')
+pm.idf <- idf.create(pm10)
+
+summary(pm.idf)
+
+plot(pm.idf, k.x=10, k.y=20, p.cex=0.35, x.adj=0.5, x.padj=4, y.las=0, y.adj=0.5, y.padj=-4, x.lab="temperature", y.lab="particulate matter concentration")
 }

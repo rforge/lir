@@ -1,8 +1,8 @@
 Package: linLIR
 Type: Package
 Title: linear Likelihood-based Imprecise Regression
-Version: 1.0-1
-Date: 2012-06-25
+Version: 1.0-2
+Date: 2012-07-08
 Author: Andrea Wiencierz
 Maintainer: Andrea Wiencierz <Andrea.Wiencierz@stat.uni-muenchen.de>
 Description: This package implements the methodology of Likelihood-based Imprecise Regression (LIR) for the case of linear regression with interval data.

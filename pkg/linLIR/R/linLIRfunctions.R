@@ -163,7 +163,7 @@ function (dat, var.labels = NULL)
 kl.ku <-
 function (n, p = 0.5, bet, epsilon = 0) 
 {
-    if ((max(p, 1 - p) + epsilon)^n > bet) {
+    if ((max(p, (1 - p)) + epsilon)^n > bet) {
         stop("k.l and k.u are not defined ! \n")
     }
     lambda <- function(s, t) {
@@ -292,6 +292,12 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             y.min <- y.lim[1]
             y.max <- y.lim[2]
         }
+        if (x.lab == " ") {
+            x.lab <- "b"
+        }
+        if (y.lab == " ") {
+            y.lab <- "a"
+        }
         if (para.typ == "polygon") {
             if (b.range[1] == -1e-05 & b.range[2] == 1e-05) {
                 b.range <- c(x.min, x.max)
@@ -308,12 +314,6 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
                   x.s.linlir$config$epsilon)
                 a.l.plot[, i] <- a.int[[1]][, 1]
                 a.u.plot[, i] <- a.int[[1]][, 2]
-            }
-            if (x.lab == " ") {
-                x.lab <- "b"
-            }
-            if (y.lab == " ") {
-                y.lab <- "a"
             }
             plot(x.min, y.max, type = "n", xlim = c(x.min, x.max), 
                 ylim = c(y.min, y.max), xlab = " ", ylab = " ", 
@@ -339,8 +339,13 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
                 padj = y.padj)
         }
         if (pl.lrm == TRUE) {
-            points(x.s.linlir$f.lrm[2], x.s.linlir$f.lrm[1], 
-                pch = 19, col = 4, cex = 1)
+            if (!is.vector(x.s.linlir$f.lrm)) {
+                print("f.lrm is not unique !")
+            }
+            else {
+                points(x.s.linlir$f.lrm[2], x.s.linlir$f.lrm[1], 
+                  pch = 19, col = 4, cex = 1)
+            }
         }
     }
     else {
@@ -369,28 +374,33 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             y.lab <- "Y"
         }
         if (typ == "lrm") {
-            if (pl.dat == TRUE) {
-                dat.idf <- idf.create(dat)
-                plot(dat.idf, k.x = k.x, k.y = k.y, p.cex = p.cex, 
-                  x.adj = x.adj, x.padj = x.padj, y.las = y.las, 
-                  y.adj = y.adj, y.padj = y.padj, x.lim = c(x.min, 
-                    x.max), y.lim = c(y.min, y.max), x.lab = x.lab, 
-                  y.lab = y.lab)
-                curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
-                  x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
-                  col = 4, lwd = 2)
+            if (!is.vector(x.s.linlir$f.lrm)) {
+                print("f.lrm is not unique !")
             }
             else {
-                plot(min(dat[, 1]), max(dat[, 4]), type = "n", 
-                  xlim = c(x.min, x.max), ylim = c(y.min, y.max), 
-                  xlab = " ", ylab = " ", las = y.las)
-                mtext(x.lab, side = 1, las = 1, adj = x.adj, 
-                  padj = x.padj)
-                mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
-                  padj = y.padj)
-                curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
-                  x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
-                  col = 4, lwd = 2)
+                if (pl.dat == TRUE) {
+                  dat.idf <- idf.create(dat)
+                  plot(dat.idf, k.x = k.x, k.y = k.y, p.cex = p.cex, 
+                    x.adj = x.adj, x.padj = x.padj, y.las = y.las, 
+                    y.adj = y.adj, y.padj = y.padj, x.lim = c(x.min, 
+                      x.max), y.lim = c(y.min, y.max), x.lab = x.lab, 
+                    y.lab = y.lab)
+                  curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
+                    x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
+                    col = 4, lwd = 2)
+                }
+                else {
+                  plot(min(dat[, 1]), max(dat[, 4]), type = "n", 
+                    xlim = c(x.min, x.max), ylim = c(y.min, y.max), 
+                    xlab = " ", ylab = " ", las = y.las)
+                  mtext(x.lab, side = 1, las = 1, adj = x.adj, 
+                    padj = x.padj)
+                  mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
+                    padj = y.padj)
+                  curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
+                    x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
+                    col = 4, lwd = 2)
+                }
             }
         }
         else {
@@ -425,18 +435,28 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
                 }
             }
             if (pl.lrm == TRUE) {
-                curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
-                  x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
-                  col = 4, lwd = 2)
+                if (!is.vector(x.s.linlir$f.lrm)) {
+                  print("f.lrm is not unique !")
+                }
+                else {
+                  curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
+                    x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
+                    col = 4, lwd = 2)
+                }
             }
         }
         if (pl.band == TRUE) {
-            curve(x.s.linlir$f.lrm[1] + x.s.linlir$q.lrm + x.s.linlir$f.lrm[2] * 
-                x, x.min - x.d, x.max + x.d, add = T, lty = 2, 
-                col = 4, lwd = 2)
-            curve(x.s.linlir$f.lrm[1] - x.s.linlir$q.lrm + x.s.linlir$f.lrm[2] * 
-                x, x.min - x.d, x.max + x.d, add = T, lty = 2, 
-                col = 4, lwd = 2)
+            if (!is.vector(x.s.linlir$f.lrm)) {
+                print("f.lrm is not unique !")
+            }
+            else {
+                curve(x.s.linlir$f.lrm[1] + x.s.linlir$q.lrm + 
+                  x.s.linlir$f.lrm[2] * x, x.min - x.d, x.max + 
+                  x.d, add = T, lty = 2, col = 4, lwd = 2)
+                curve(x.s.linlir$f.lrm[1] - x.s.linlir$q.lrm + 
+                  x.s.linlir$f.lrm[2] * x, x.min - x.d, x.max + 
+                  x.d, add = T, lty = 2, col = 4, lwd = 2)
+            }
         }
     }
 }
@@ -470,31 +490,32 @@ function (dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
         dat <- cbind(dat.idf[[1]], dat.idf[[2]])
     }
     lrm <- gen.lms(dat, p, bet, epsilon, k.u = 0)
-    s.linlir <- vector("list", 2)
+    x.s.linlir <- vector("list", 2)
     if (!is.vector(lrm[[1]])) {
-        s.linlir[[1]] <- lrm[[1]][, 1:2]
-        attr(s.linlir, "names")[1] <- "f.lrm"
-        s.linlir[[2]] <- lrm[[1]][1, 3]
-        attr(s.linlir, "names")[2] <- "q.lrm"
+        x.s.linlir[[1]] <- lrm[[1]][, 1:2]
+        attr(x.s.linlir, "names")[1] <- "f.lrm"
+        x.s.linlir[[2]] <- lrm[[1]][1, 3]
+        attr(x.s.linlir, "names")[2] <- "q.lrm"
     }
     else {
-        s.linlir[[1]] <- lrm[[1]][1:2]
-        attr(s.linlir, "names")[1] <- "f.lrm"
-        s.linlir[[2]] <- lrm[[1]][3]
-        attr(s.linlir, "names")[2] <- "q.lrm"
+        x.s.linlir[[1]] <- lrm[[1]][1:2]
+        attr(x.s.linlir, "names")[1] <- "f.lrm"
+        x.s.linlir[[2]] <- lrm[[1]][3]
+        attr(x.s.linlir, "names")[2] <- "q.lrm"
     }
     b.search <- lrm[[2]][1]
-    if (!is.vector(s.linlir$f.lrm)) {
-        for (j in 1:nrow(s.linlir$f.lrm)) {
-            i <- 5
-            prepara <- matrix(NA, 1, 2)
+    if (!is.vector(x.s.linlir$f.lrm)) {
+        prepara <- matrix(NA, 1, 2)
+        for (j in 1:nrow(x.s.linlir$f.lrm)) {
+            i <- 1
             while (i <= 15) {
-                b.range <- c(s.linlir$f.lrm[j, 2] - i * b.search, 
-                  s.linlir$f.lrm[j, 2] + i * b.search)
+                b.range <- c(x.s.linlir$f.lrm[j, 2] - i * b.search, 
+                  x.s.linlir$f.lrm[j, 2] + i * b.search)
                 par <- undom.para(dat, b.range, b.extra = 0, 
-                  b.grid, q.lrm = s.linlir$q.lrm, p, bet, epsilon)
-                if (par$b.undom[1] > b.range[1] & par$b.undom[2] < 
-                  b.range[2]) {
+                  b.grid, q.lrm = x.s.linlir$q.lrm, p, bet, epsilon)
+                if (round(par$b.undom[1], 10) > round(b.range[1], 
+                  10) & round(par$b.undom[2], 10) < round(b.range[2], 
+                  10)) {
                   i <- 99
                 }
                 else {
@@ -504,37 +525,47 @@ function (dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
             if (i == 16) {
                 b.extra <- runif(b.grid/2, -1e+09, 1e+09)
                 para <- undom.para(dat, b.range, b.extra, b.grid, 
-                  q.lrm = s.linlir$q.lrm, p, bet, epsilon)
+                  q.lrm = x.s.linlir$q.lrm, p, bet, epsilon)
             }
             else {
+                w <- (ceiling(par$b.undom[2]) - floor(par$b.undom[1]))/b.grid
                 para <- undom.para(dat, c(floor(par$b.undom[1]) - 
-                  0.1, ceiling(par$b.undom[2]) + 0.1), b.extra = 0, 
-                  b.grid, q.lrm = s.linlir$q.lrm, p, bet, epsilon)
+                  w, ceiling(par$b.undom[2]) + w), b.extra = 0, 
+                  b.grid = (b.grid + 2), q.lrm = x.s.linlir$q.lrm, 
+                  p, bet, epsilon)
             }
             prepara <- rbind(prepara, para[[3]])
             prepara <- unique(prepara)
         }
         preresult <- prepara[is.na(prepara[, 1]) == F, ]
-        result1 <- c(min(preresult[, 1]), max(preresult[, 1]))
-        attr(result1, "names") <- c("a.min", "a.max")
-        result2 <- c(min(preresult[, 2]), max(preresult[, 2]))
-        attr(result2, "names") <- c("b.min", "b.max")
-        if (round(result2[1], 10) == b.range[1] | round(result2[2], 
-            10) == b.range[2]) {
-            print("b.range too small or possibly unbounded !")
+        if (!is.vector(preresult)) {
+            result1 <- c(min(preresult[, 1]), max(preresult[, 
+                1]))
+            attr(result1, "names") <- c("a.min", "a.max")
+            result2 <- c(min(preresult[, 2]), max(preresult[, 
+                2]))
+            attr(result2, "names") <- c("b.min", "b.max")
+            result3 <- preresult
         }
-        result3 <- preresult
+        else {
+            result1 <- c(preresult[1], preresult[1])
+            attr(result1, "names") <- c("a.min", "a.max")
+            result2 <- c(preresult[2], preresult[2])
+            attr(result2, "names") <- c("b.min", "b.max")
+            result3 <- preresult
+        }
         para <- list(a.undom = result1, b.undom = result2, undom.para = result3)
     }
     else {
-        i <- 5
+        i <- 1
         while (i <= 15) {
-            b.range <- c(s.linlir$f.lrm[2] - i * b.search, s.linlir$f.lrm[2] + 
-                i * b.search)
+            b.range <- c(x.s.linlir$f.lrm[[2]] - i * b.search, 
+                x.s.linlir$f.lrm[[2]] + i * b.search)
             par <- undom.para(dat, b.range, b.extra = 0, b.grid, 
-                q.lrm = s.linlir$q.lrm, p, bet, epsilon)
-            if (par$b.undom[1] > b.range[1] & par$b.undom[2] < 
-                b.range[2]) {
+                q.lrm = x.s.linlir$q.lrm, p, bet, epsilon)
+            if (round(par$b.undom[1], 10) > round(b.range[1], 
+                10) & round(par$b.undom[2], 10) < round(b.range[2], 
+                10)) {
                 i <- 99
             }
             else {
@@ -544,17 +575,19 @@ function (dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
         if (i == 16) {
             b.extra <- runif(b.grid/2, -1e+09, 1e+09)
             para <- undom.para(dat, b.range, b.extra, b.grid, 
-                q.lrm = s.linlir$q.lrm, p, bet, epsilon)
+                q.lrm = x.s.linlir$q.lrm, p, bet, epsilon)
         }
         else {
+            w <- (ceiling(par$b.undom[2]) - floor(par$b.undom[1]))/b.grid
             para <- undom.para(dat, c(floor(par$b.undom[1]) - 
-                0.1, ceiling(par$b.undom[2]) + 0.1), b.extra = 0, 
-                b.grid, q.lrm = s.linlir$q.lrm, p, bet, epsilon)
+                w, ceiling(par$b.undom[2]) + w), b.extra = 0, 
+                b.grid = (b.grid + 2), q.lrm = x.s.linlir$q.lrm, 
+                p, bet, epsilon)
         }
     }
-    s.linlir$a.undom <- para[[1]]
-    s.linlir$b.undom <- para[[2]]
-    s.linlir$undom.para <- para[[3]]
+    x.s.linlir$a.undom <- para[[1]]
+    x.s.linlir$b.undom <- para[[2]]
+    x.s.linlir$undom.para <- para[[3]]
     klku <- kl.ku(dat.idf$n, p, bet, epsilon)
     if (epsilon <= 0) {
         conf.l <- sum(dbinom((klku[1] + 1):klku[2], dat.idf$n, 
@@ -571,13 +604,13 @@ function (dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
         }
     }
     as.conf <- pchisq(q = (-2 * log(bet)), df = 1)
-    s.linlir$config <- list(p = p, beta = bet, epsilon = epsilon, 
+    x.s.linlir$config <- list(p = p, beta = bet, epsilon = epsilon, 
         k.l = klku[1], k.u = klku[2], conf.lev.ci = conf.l, as.conf.lev.ci = as.conf)
-    s.linlir$dat <- dat
-    s.linlir$n <- dat.idf$n
-    s.linlir$call <- match.call()
-    class(s.linlir) <- "s.linlir"
-    s.linlir
+    x.s.linlir$dat <- dat
+    x.s.linlir$n <- dat.idf$n
+    x.s.linlir$call <- match.call()
+    class(x.s.linlir) <- "s.linlir"
+    x.s.linlir
 }
 summary.idf <-
 function (object, ...) 
@@ -599,6 +632,12 @@ function (object, ...)
     cat("\nSimple linear LIR analysis results \n")
     cat("\nCall:\n")
     print(x.s.linlir$call)
+    cat("\nRanges of parameter values of the undominated functions:\n")
+    cat("intercept of f in [", eval(x.s.linlir$a.undom[1]), ",", 
+        eval(x.s.linlir$a.undom[2]), "]\n", sep = "")
+    cat("slope of f in [", eval(x.s.linlir$b.undom[1]), ",", 
+        eval(x.s.linlir$b.undom[2]), "]\n", sep = "")
+    cat("\nBandwidth: ", eval(2 * x.s.linlir$q.lrm), "\n")
     cat("\nEstimated parameters of the function f.lrm:\n")
     if (!is.vector(x.s.linlir$f.lrm)) {
         cat("intercepts of f.lrm: ", eval(x.s.linlir$f.lrm[, 
@@ -611,11 +650,6 @@ function (object, ...)
             "\n")
         cat("slope of f.lrm: ", eval(x.s.linlir$f.lrm[2]), "\n")
     }
-    cat("\nRanges of parameter values of the undominated functions:\n")
-    cat("intercept of f in [", eval(x.s.linlir$a.undom[1]), ",", 
-        eval(x.s.linlir$a.undom[2]), "]\n", sep = "")
-    cat("slope of f in [", eval(x.s.linlir$b.undom[1]), ",", 
-        eval(x.s.linlir$b.undom[2]), "]\n", sep = "")
     cat("\nNumber of observations:", x.s.linlir$n, "\n")
     cat("\nLIR settings:\n")
     cat(paste("p:", eval(x.s.linlir$config$p), "   beta:", eval(x.s.linlir$config$bet), 
@@ -703,6 +737,13 @@ function (dat, b.range, b.extra = 0, b.grid = 1000, q.lrm, p = 0.5,
     if (b.range[2] <= b.range[1]) {
         stop("b.range must be given as b.range[1] < b.range[2] !\n")
     }
+    b.step <- (b.range[2] - b.range[1])/b.grid
+    if (b.step > 0.1) {
+        mp <- ceiling(b.step * 10)
+        b.grid <- mp * b.grid
+        cat("The given b.grid value was too small, therefore multiplied by", 
+            eval(mp), "!")
+    }
     b.pot <- c(seq(b.range[1], b.range[2], by = (b.range[2] - 
         b.range[1])/b.grid), b.extra)
     para.undom <- matrix(NA, 1, 2)
@@ -731,14 +772,27 @@ function (dat, b.range, b.extra = 0, b.grid = 1000, q.lrm, p = 0.5,
         stop("Too many NA's !\n")
     }
     preresult <- para.undom[is.na(para.undom[, 1]) == F, ]
-    result1 <- c(min(preresult[, 1]), max(preresult[, 1]))
-    attr(result1, "names") <- c("a.min", "a.max")
-    result2 <- c(min(preresult[, 2]), max(preresult[, 2]))
-    attr(result2, "names") <- c("b.min", "b.max")
-    if (round(result2[1], 10) == b.range[1] | round(result2[2], 
-        10) == b.range[2]) {
-        print("b.range too small or possibly unbounded !")
+    if (!is.vector(preresult)) {
+        result1 <- c(min(preresult[, 1]), max(preresult[, 1]))
+        attr(result1, "names") <- c("a.min", "a.max")
+        result2 <- c(min(preresult[, 2]), max(preresult[, 2]))
+        attr(result2, "names") <- c("b.min", "b.max")
+        if (round(result2[1], 10) == round(b.range[1], 10) | 
+            round(result2[2], 10) == round(b.range[2], 10)) {
+            print("b.range too small or possibly unbounded !")
+        }
+        result3 <- preresult
     }
-    result3 <- preresult
+    else {
+        result1 <- c(preresult[1], preresult[1])
+        attr(result1, "names") <- c("a.min", "a.max")
+        result2 <- c(preresult[2], preresult[2])
+        attr(result2, "names") <- c("b.min", "b.max")
+        if (round(result2[1], 10) == round(b.range[1], 10) | 
+            round(result2[2], 10) == round(b.range[2], 10)) {
+            print("b.range too small or possibly unbounded !")
+        }
+        result3 <- preresult
+    }
     list(a.undom = result1, b.undom = result2, undom.para = result3)
 }
