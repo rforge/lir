@@ -1,8 +1,4 @@
 # ToDo for linLIR:
 
-- plot.s.linlir pl.lrm==TRUE anpassen für mehrere f.lrm
-
-- plot.s.linlir typ="para" para.typ="polygon" anpassen für mehrere f.lrm
-- plot.s.linlir typ="para" anpassen für Spezialfall, dass nur eine undominierte
 
 

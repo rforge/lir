@@ -302,8 +302,9 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             if (b.range[1] == -1e-05 & b.range[2] == 1e-05) {
                 b.range <- c(x.min, x.max)
             }
-            b.pot <- seq(b.range[1], b.range[2], by = (b.range[2] - 
-                b.range[1])/b.grid)
+            b.d <- (b.range[2] - b.range[1])/10
+            b.pot <- seq(b.range[1] - b.d, b.range[2] + b.d, 
+                by = (b.range[2] - b.range[1])/b.grid)
             n <- x.s.linlir$n
             k.l <- x.s.linlir$config$k.l
             a.l.plot <- matrix(NA, nrow = (n - k.l), ncol = length(b.pot))
@@ -328,18 +329,40 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
                   ]], rev(a.u.plot[j, a.l.plot[j, ] <= a.u.plot[j, 
                   ]])), col = "darkgrey", lty = 0)
             }
+            if (!is.matrix(x.s.linlir$undom.para)) {
+                points(x.s.linlir$undom.para[2], x.s.linlir$undom.para[1], 
+                  pch = 19, cex = 0.5, col = "darkgrey")
+            }
         }
         else {
             undom.para <- x.s.linlir$undom.para
-            plot(undom.para[, 2], undom.para[, 1], pch = 19, 
-                col = "darkgrey", xlim = c(x.min, x.max), ylim = c(y.min, 
-                  y.max), xlab = " ", ylab = " ", las = y.las)
-            mtext(x.lab, side = 1, las = 1, adj = x.adj, padj = x.padj)
-            mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
-                padj = y.padj)
+            if (is.matrix(undom.para)) {
+                plot(undom.para[, 2], undom.para[, 1], pch = 19, 
+                  cex = 0.5, col = "darkgrey", xlim = c(x.min, 
+                    x.max), ylim = c(y.min, y.max), xlab = " ", 
+                  ylab = " ", las = y.las)
+                mtext(x.lab, side = 1, las = 1, adj = x.adj, 
+                  padj = x.padj)
+                mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
+                  padj = y.padj)
+            }
+            else {
+                plot(undom.para[2], undom.para[1], pch = 19, 
+                  cex = 0.5, col = "darkgrey", xlim = c(x.min, 
+                    x.max), ylim = c(y.min, y.max), xlab = " ", 
+                  ylab = " ", las = y.las)
+                mtext(x.lab, side = 1, las = 1, adj = x.adj, 
+                  padj = x.padj)
+                mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
+                  padj = y.padj)
+            }
         }
         if (pl.lrm == TRUE) {
             if (!is.vector(x.s.linlir$f.lrm)) {
+                for (j in 1:nrow(x.s.linlir$f.lrm)) {
+                  points(x.s.linlir$f.lrm[j, 2], x.s.linlir$f.lrm[j, 
+                    1], pch = 19, col = 4, cex = 1)
+                }
                 print("f.lrm is not unique !")
             }
             else {
@@ -375,6 +398,33 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
         }
         if (typ == "lrm") {
             if (!is.vector(x.s.linlir$f.lrm)) {
+                if (pl.dat == TRUE) {
+                  dat.idf <- idf.create(dat)
+                  plot(dat.idf, k.x = k.x, k.y = k.y, p.cex = p.cex, 
+                    x.adj = x.adj, x.padj = x.padj, y.las = y.las, 
+                    y.adj = y.adj, y.padj = y.padj, x.lim = c(x.min, 
+                      x.max), y.lim = c(y.min, y.max), x.lab = x.lab, 
+                    y.lab = y.lab)
+                  for (j in 1:nrow(x.s.linlir$f.lrm)) {
+                    curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$f.lrm[j, 
+                      2] * x, x.min - x.d, x.max + x.d, add = T, 
+                      lty = 1, col = 4, lwd = 2)
+                  }
+                }
+                else {
+                  plot(min(dat[, 1]), max(dat[, 4]), type = "n", 
+                    xlim = c(x.min, x.max), ylim = c(y.min, y.max), 
+                    xlab = " ", ylab = " ", las = y.las)
+                  mtext(x.lab, side = 1, las = 1, adj = x.adj, 
+                    padj = x.padj)
+                  mtext(y.lab, side = 2, las = y.las, adj = y.adj, 
+                    padj = y.padj)
+                  for (j in 1:nrow(x.s.linlir$f.lrm)) {
+                    curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$f.lrm[j, 
+                      2] * x, x.min - x.d, x.max + x.d, add = T, 
+                      lty = 1, col = 4, lwd = 2)
+                  }
+                }
                 print("f.lrm is not unique !")
             }
             else {
@@ -404,6 +454,9 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             }
         }
         else {
+            if (nb.func < nrow(x.s.linlir$undom.para)) {
+                nb.func <- nrow(x.s.linlir$undom.para)
+            }
             if (!is.null(seed.func)) {
                 set.seed(seed.func)
             }
@@ -436,6 +489,11 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             }
             if (pl.lrm == TRUE) {
                 if (!is.vector(x.s.linlir$f.lrm)) {
+                  for (j in 1:nrow(x.s.linlir$f.lrm)) {
+                    curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$f.lrm[j, 
+                      2] * x, x.min - x.d, x.max + x.d, add = T, 
+                      lty = 1, col = 4, lwd = 2)
+                  }
                   print("f.lrm is not unique !")
                 }
                 else {
@@ -447,6 +505,14 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
         }
         if (pl.band == TRUE) {
             if (!is.vector(x.s.linlir$f.lrm)) {
+                for (j in 1:nrow(x.s.linlir$f.lrm)) {
+                  curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$q.lrm + 
+                    x.s.linlir$f.lrm[j, 2] * x, x.min - x.d, 
+                    x.max + x.d, add = T, lty = 2, col = 4, lwd = 2)
+                  curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$q.lrm + 
+                    x.s.linlir$f.lrm[j, 2] * x, x.min - x.d, 
+                    x.max + x.d, add = T, lty = 2, col = 4, lwd = 2)
+                }
                 print("f.lrm is not unique !")
             }
             else {
@@ -505,56 +571,33 @@ function (dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
     }
     b.search <- lrm[[2]][1]
     if (!is.vector(x.s.linlir$f.lrm)) {
-        prepara <- matrix(NA, 1, 2)
-        for (j in 1:nrow(x.s.linlir$f.lrm)) {
-            i <- 1
-            while (i <= 15) {
-                b.range <- c(x.s.linlir$f.lrm[j, 2] - i * b.search, 
-                  x.s.linlir$f.lrm[j, 2] + i * b.search)
-                par <- undom.para(dat, b.range, b.extra = 0, 
-                  b.grid, q.lrm = x.s.linlir$q.lrm, p, bet, epsilon)
-                if (round(par$b.undom[1], 10) > round(b.range[1], 
-                  10) & round(par$b.undom[2], 10) < round(b.range[2], 
-                  10)) {
-                  i <- 99
-                }
-                else {
-                  i <- i + 1
-                }
-            }
-            if (i == 16) {
-                b.extra <- runif(b.grid/2, -1e+09, 1e+09)
-                para <- undom.para(dat, b.range, b.extra, b.grid, 
-                  q.lrm = x.s.linlir$q.lrm, p, bet, epsilon)
+        i <- 1
+        while (i <= 15) {
+            b.range <- c(min(x.s.linlir$f.lrm[, 2]) - i * b.search, 
+                max(x.s.linlir$f.lrm[, 2]) + i * b.search)
+            par <- undom.para(dat, b.range, b.extra = 0, b.grid, 
+                q.lrm = x.s.linlir$q.lrm, p, bet, epsilon)
+            if (round(par$b.undom[1], 10) > round(b.range[1], 
+                10) & round(par$b.undom[2], 10) < round(b.range[2], 
+                10)) {
+                i <- 99
             }
             else {
-                w <- (ceiling(par$b.undom[2]) - floor(par$b.undom[1]))/b.grid
-                para <- undom.para(dat, c(floor(par$b.undom[1]) - 
-                  w, ceiling(par$b.undom[2]) + w), b.extra = 0, 
-                  b.grid = (b.grid + 2), q.lrm = x.s.linlir$q.lrm, 
-                  p, bet, epsilon)
+                i <- i + 1
             }
-            prepara <- rbind(prepara, para[[3]])
-            prepara <- unique(prepara)
         }
-        preresult <- prepara[is.na(prepara[, 1]) == F, ]
-        if (!is.vector(preresult)) {
-            result1 <- c(min(preresult[, 1]), max(preresult[, 
-                1]))
-            attr(result1, "names") <- c("a.min", "a.max")
-            result2 <- c(min(preresult[, 2]), max(preresult[, 
-                2]))
-            attr(result2, "names") <- c("b.min", "b.max")
-            result3 <- preresult
+        if (i == 16) {
+            b.extra <- runif(b.grid/2, -1e+09, 1e+09)
+            para <- undom.para(dat, b.range, b.extra, b.grid, 
+                q.lrm = x.s.linlir$q.lrm, p, bet, epsilon)
         }
         else {
-            result1 <- c(preresult[1], preresult[1])
-            attr(result1, "names") <- c("a.min", "a.max")
-            result2 <- c(preresult[2], preresult[2])
-            attr(result2, "names") <- c("b.min", "b.max")
-            result3 <- preresult
+            w <- (ceiling(par$b.undom[2]) - floor(par$b.undom[1]))/b.grid
+            para <- undom.para(dat, c(floor(par$b.undom[1]) - 
+                w, ceiling(par$b.undom[2]) + w), b.extra = 0, 
+                b.grid = (b.grid + 2), q.lrm = x.s.linlir$q.lrm, 
+                p, bet, epsilon)
         }
-        para <- list(a.undom = result1, b.undom = result2, undom.para = result3)
     }
     else {
         i <- 1
@@ -579,6 +622,10 @@ function (dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 1000)
         }
         else {
             w <- (ceiling(par$b.undom[2]) - floor(par$b.undom[1]))/b.grid
+            if (round(w, 10) == 0) {
+                w <- 1
+                print("Maybe only 1 undominated function !")
+            }
             para <- undom.para(dat, c(floor(par$b.undom[1]) - 
                 w, ceiling(par$b.undom[2]) + w), b.extra = 0, 
                 b.grid = (b.grid + 2), q.lrm = x.s.linlir$q.lrm, 
