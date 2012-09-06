@@ -454,7 +454,7 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.range = c(-1e-05,
             }
         }
         else {
-            if (nb.func < nrow(x.s.linlir$undom.para)) {
+            if (nb.func > nrow(x.s.linlir$undom.para)) {
                 nb.func <- nrow(x.s.linlir$undom.para)
             }
             if (!is.null(seed.func)) {
