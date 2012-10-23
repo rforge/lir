@@ -1,4 +1,9 @@
 # ToDo for linLIR:
 
+- R 2.15.2 installieren (soll am 26.10. rauskommen)
+- plot.idf()-Funktion um Option "hist" erweitern
+- s.linlir()-Funktion kleine Korrekturen
+- plot.s.linlir()-Funktion bei plot.dat=T um Option "hist" erweitern
+
 
 
