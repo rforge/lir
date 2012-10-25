@@ -4,6 +4,7 @@
 - help files für plot.idf()-Funktion um Erläuterung für neue Variablen (typ, inf.margin, col.lev, plot.grid) erweitern UND Beispiele aktualisieren
 - s.linlir()-Funktion kleine Korrekturen gemacht, aber keine neue Variablen
 - plot.s.linlir()-Funktion bei plot.dat=T um Option "hist" erweitern
+- checken ob sich Änderungen in undom.para() auf s.linlir und plot.s.linlir auswirken und ggf. übernehmen
 
 
 
