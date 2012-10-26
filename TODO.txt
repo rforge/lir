@@ -2,9 +2,10 @@
 
 - R 2.15.2 installieren (soll am 26.10. rauskommen)
 - help files für plot.idf()-Funktion um Erläuterung für neue Variablen (typ, inf.margin, col.lev, plot.grid) erweitern UND Beispiele aktualisieren
-- s.linlir()-Funktion kleine Korrekturen gemacht, aber keine neue Variablen
-- plot.s.linlir()-Funktion bei plot.dat=T um Option "hist" erweitern
-- checken ob sich Änderungen in undom.para() auf s.linlir und plot.s.linlir auswirken und ggf. übernehmen
+- help files für plot.s.linlir()-Funktion um Erläuterung für neue Variablen (pl.dat.typ, inf.margin, col.lev, plot.grid) erweitern UND Beispiele aktualisieren
+
+- wenn okay, dann neue Version 1.1(-1?) auf R-Forge hochladen
+- wenn R-Forge-Checks okay, zu CRAN submitten...
 
 
 
