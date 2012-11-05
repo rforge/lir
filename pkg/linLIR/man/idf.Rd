@@ -12,7 +12,7 @@ Create an interval data frame (\code{idf}-object), summarize its content and vis
 idf.create(dat, var.labels = NULL)
 
 \method{summary}{idf}(object, ...)
-\method{plot}{idf}(x, y=NULL, ..., var = NULL, k.x = 1, k.y = 1,p.cex = 1, x.adj = 0.5, x.padj = 3, y.las = 0, y.adj = 1, y.padj = 0, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = "X", y.lab = "Y")
+\method{plot}{idf}(x, y=NULL, ..., var = NULL, typ="hist", k.x = 1, k.y = 1, inf.margin=10, p.cex=1, col.lev=15, plot.grid=FALSE, x.adj = 0.5, x.padj = 3, y.las = 0, y.adj = 1, y.padj = 0, x.lim = c(0, 0), y.lim = c(0, 0), x.lab = "X", y.lab = "Y")
 }
 \arguments{
   \item{dat}{
@@ -38,6 +38,9 @@ Argument of the generic function \code{plot}. Here \code{y=NULL}.
 
   \item{var}{
 Names of the two variables out of the \code{idf}-object to be plotted. (Optional)
+}
+  \item{typ}{Type of the plot. Possible values are \code{"hist"}: plot 2-dim. histogram (default) and \code{"draft"}.
+ 
 }
   \item{k.x}{
 Particular plot function parameter. 1/\code{k.x} is the step width along the abscissa.
@@ -89,9 +92,9 @@ An \code{idf}-object of \code{m} variables, which is a list of \code{m+1} entrie
 \references{
 M. Cattaneo, A. Wiencierz (2012b). On the implementation of LIR: the case of simple linear regression with interval data. Technical Report No. 127. Department of Statistics. LMU Munich.
 
-A. Wiencierz, M. Cattaneo (2012). An exact algorithm for Likelihood-based Imprecise Regression in the case of simple linear regression with interval data. (Accepted for the 6th International Conference on Soft Methods in Probability and Statistics (SMPS 2012). Publication in the series Advances in Intelligent and Soft Computing. Springer-Verlag.)
+A. Wiencierz, M. Cattaneo (2012). An exact algorithm for Likelihood-based Imprecise Regression in the case of simple linear regression with interval data. In: R. Kruse et al. (Eds.). Advances in Intelligent Systems and Computing. Vol. 190. Springer. pp. 293-301.
 
-M. Cattaneo, A. Wiencierz (2012a). Likelihood-based Imprecise Regression. International Journal of Approximate Reasoning. In Press. (Uncorrected Proof: \url{http://www.sciencedirect.com/science/article/pii/S0888613X12000862})
+M. Cattaneo, A. Wiencierz (2012a). Likelihood-based Imprecise Regression. International Journal of Approximate Reasoning. Vol. 53. pp. 1137-1154.
 }
 \examples{
 data('toy.smps')
