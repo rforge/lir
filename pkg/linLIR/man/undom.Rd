@@ -5,12 +5,12 @@
 Finding undominated parameters
 }
 \description{
-Functions within the \code{s.linlir}-function that determine the parameter combinations corresponding to undominated regression lines. The \code{undom.a}-function finds the set of undominated intercept values associated with a given slope and the \code{undom.para}-function finds the set of undominated intercept values associated with all slope values in a given range.
+Functions within the \code{s.linlir}-function that determine the parameter combinations corresponding to undominated regression lines. The \code{undom.a}-function finds the set of undominated intercept values associated with a given slope and the \code{undom.para}-function finds the set of undominated intercept values associated with a given vector of slope values.
 }
 \usage{
 undom.a(dat, b, q.lrm, p = 0.5, bet, epsilon = 0)
 
-undom.para(dat, b.range, b.extra = 0, b.grid = 1000, q.lrm, p = 0.5, bet, epsilon = 0)
+undom.para(dat, b.range, a.grid = 100, q.lrm, p = 0.5, bet, epsilon = 0)
 }
 \arguments{
   \item{dat}{
@@ -29,17 +29,17 @@ Quantile of the abolute residuals' distribution to be used as loss function in t
 Cutoff-point for the normalized profile likelihood function.
 }
   \item{epsilon}{
-Fraction of errors considered.
+Fraction of coarsening errors considered.
 }
   \item{b.range}{
-Considered interval of slope values.
+Vector of slope values handed over to the function \code{undom.para}.
 }
-  \item{b.extra}{
-If it is likely that the set of undominated regression parameters is unbounded, one can consider very small or large values in addition to the \code{b.range}.
+  \item{a.grid}{
+Particular parameter of the function \code{undom.para} indicating how fine the set of undominated parameter combinations is approximated with respect to the intercept values.
 }
-  \item{b.grid}{
-1/\code{b.grid} is the width between two points of the considered grid of slope values within \code{b.range}.
 }
+\details{
+The \code{undom.para}-function together with some preparational steps in the \code{s.linlir}-function implement the second part of the exact algorithm for the simple linear LIR analysis with interval data developed in M. Cattaneo, A. Wiencierz (2012c).
 }
 \value{
 The \code{undom.a}-function returns a list of 2 components:
@@ -52,11 +52,11 @@ The \code{undom.para}-function returns a list of 3 components:
 \item{undom.para}{A matrix of undominated parameter combinations approximating the entire set of parameters corresponding to the set of undominated regression lines.}
 }
 \references{
-M. Cattaneo, A. Wiencierz (2012b). On the implementation of LIR: the case of simple linear regression with interval data. Technical Report No. 127. Department of Statistics. LMU Munich.
+M. Cattaneo, A. Wiencierz (2012c). On the implementation of LIR: the case of simple linear regression with interval data. Technical Report No. 127. Department of Statistics. LMU Munich.
 
-A. Wiencierz, M. Cattaneo (2012). An exact algorithm for Likelihood-based Imprecise Regression in the case of simple linear regression with interval data. (Accepted for the 6th International Conference on Soft Methods in Probability and Statistics (SMPS 2012). Publication in the series Advances in Intelligent and Soft Computing. Springer-Verlag.)
+A. Wiencierz, M. Cattaneo (2012b). An exact algorithm for Likelihood-based Imprecise Regression in the case of simple linear regression with interval data. In: R. Kruse et al. (Eds.). Advances in Intelligent Systems and Computing. Vol. 190. Springer. pp. 293-301.
 
-M. Cattaneo, A. Wiencierz (2012a). Likelihood-based Imprecise Regression. International Journal of Approximate Reasoning. In Press. (Uncorrected Proof: \url{http://www.sciencedirect.com/science/article/pii/S0888613X12000862})
+M. Cattaneo, A. Wiencierz (2012a). Likelihood-based Imprecise Regression. International Journal of Approximate Reasoning. Vol. 53. pp. 1137-1154.
 }
 \seealso{
 \code{\link{s.linlir}},

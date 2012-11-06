@@ -48,9 +48,17 @@ Particular plot function parameter. 1/\code{k.x} is the step width along the abs
   \item{k.y}{
 Particular plot function parameter. 1/\code{k.y} is the step width along the ordinate.
 }
-
+  \item{inf.margin}{
+Particular parameter for plot type \code{"draft"}. \code{inf.margin} is the number of steps that the infinite observations are drawn beyond the limits of the plot.
+}
   \item{p.cex}{
-Particular plot function parameter. \code{p.cex} is the point size to fill the rectangles with grey color.
+Particular parameter for plot type \code{"draft"}. \code{p.cex} is the point size to fill the rectangles with grey color.
+}
+  \item{col.lev}{
+Particular parameter for plot type \code{"hist"} indicating the number of different grey levels in the 2-dim. histogram. 
+}
+  \item{plot.grid}{
+Logical for plot type \code{"hist"}. If \code{plot.grid=TRUE} dashed lines are added to the plot to indicate the location of the interval endpoints. This is particularly useful for categorized data.
 }
   \item{x.adj}{
 Horizontal position of the text for the abscissa. 
@@ -82,7 +90,7 @@ Title of the ordinate.
 }
 }
 \details{
-Within the LIR framework all types of interval data are possible, including the particular cases of actually precise data (i.e. lower endpoint = upper endpoint) or missing data (i.e., in case of a real valued variable, lower endpoint = -Inf and upper endpoint = Inf). For the LIR analysis it makes no difference if the intervals are closed or not, therefore, the created \code{idf}-object does not contain this information.
+Within the LIR framework all types of interval data are possible, including the particular cases of actually precise data (i.e., lower endpoint = upper endpoint) or missing data (i.e., in case of a real valued variable, lower endpoint = -Inf and upper endpoint = Inf). For the LIR analysis it makes practically no difference if the intervals are closed or not, therefore, the created \code{idf}-object does not contain this information.
 }
 \value{
 An \code{idf}-object of \code{m} variables, which is a list of \code{m+1} entries.
@@ -90,9 +98,9 @@ An \code{idf}-object of \code{m} variables, which is a list of \code{m+1} entrie
 \item{n}{Number of observations.}
 }
 \references{
-M. Cattaneo, A. Wiencierz (2012b). On the implementation of LIR: the case of simple linear regression with interval data. Technical Report No. 127. Department of Statistics. LMU Munich.
+M. Cattaneo, A. Wiencierz (2012c). On the implementation of LIR: the case of simple linear regression with interval data. Technical Report No. 127. Department of Statistics. LMU Munich.
 
-A. Wiencierz, M. Cattaneo (2012). An exact algorithm for Likelihood-based Imprecise Regression in the case of simple linear regression with interval data. In: R. Kruse et al. (Eds.). Advances in Intelligent Systems and Computing. Vol. 190. Springer. pp. 293-301.
+A. Wiencierz, M. Cattaneo (2012b). An exact algorithm for Likelihood-based Imprecise Regression in the case of simple linear regression with interval data. In: R. Kruse et al. (Eds.). Advances in Intelligent Systems and Computing. Vol. 190. Springer. pp. 293-301.
 
 M. Cattaneo, A. Wiencierz (2012a). Likelihood-based Imprecise Regression. International Journal of Approximate Reasoning. Vol. 53. pp. 1137-1154.
 }
@@ -102,8 +110,8 @@ toy.idf <- idf.create(toy.smps, var.labels=c("x","y"))
 
 summary(toy.idf)
 
-plot(toy.idf, k.x=10, k.y=10, p.cex=1.5, y.las=1, y.adj=6) 
-plot(toy.idf, k.x=10, k.y=10, x.adj=0.7, y.las=1, y.adj=6, y.padj=-3)
+plot(toy.idf, typ="draft", k.x=10, k.y=10, p.cex=1.5, y.las=1, y.adj=6) 
+plot(toy.idf, typ="draft", k.x=10, k.y=10, x.adj=0.7, y.las=1, y.adj=6, y.padj=-3)
 plot(toy.idf, k.x=10, k.y=10, x.adj=0.7, x.padj=4, y.adj=0.7, y.padj=-4)
 
 data('pm10')
@@ -111,5 +119,5 @@ pm.idf <- idf.create(pm10)
 
 summary(pm.idf)
 
-plot(pm.idf, k.x=10, k.y=20, p.cex=0.35, x.adj=0.5, x.padj=4, y.las=0, y.adj=0.5, y.padj=-4, x.lab="temperature", y.lab="particulate matter concentration")
+plot(pm.idf, typ="draft", k.x=10, k.y=20, p.cex=0.35, x.adj=0.5, x.padj=4, y.las=0, y.adj=0.5, y.padj=-4, x.lab="temperature", y.lab="particulate matter concentration")
 }

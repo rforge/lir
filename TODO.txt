@@ -1,11 +1,13 @@
 # ToDo for linLIR:
 
-- R 2.15.2 installieren (soll am 26.10. rauskommen)
 - help files für plot.idf()-Funktion um Erläuterung für neue Variablen (typ, inf.margin, col.lev, plot.grid) erweitern UND Beispiele aktualisieren
-- help files für plot.s.linlir()-Funktion um Erläuterung für neue Variablen (pl.dat.typ, inf.margin, col.lev, plot.grid) erweitern UND Beispiele aktualisieren
+- help files für gen.lms() und undom.para() ggf. anpassen
+- help files für s.linlir()-Funktion anpassen UND Beispiele aktualisieren
+- help files für plot.s.linlir()-Funktion um Erläuterung für neue Variablen (pl.dat.typ, inf.margin, col.lev, plot.grid, lrm.col) erweitern UND Beispiele aktualisieren
 
-- wenn okay, dann neue Version 1.1(-1?) auf R-Forge hochladen
+- wenn okay, dann neue Version 1.1 auf R-Forge hochladen
 - wenn R-Forge-Checks okay, zu CRAN submitten...
 
-
+- bei Gelegenheit hinzufügen:
+Option für Datenplot (plot.idf), die auf polygon() basiert, wo jeder Datenpunkt als halbtransparentes Polygon (ohne Rand!) gezeichnet wird
 

@@ -397,10 +397,10 @@ function (x, y = NULL, ..., var = NULL, typ = "hist", k.x = 1,
 plot.s.linlir <-
 function (x, y = NULL, ..., typ, para.typ = "polygon", b.grid = 500, 
     nb.func = 1000, seed.func = NULL, pl.lrm = TRUE, pl.band = FALSE, 
-    pl.dat = FALSE, pl.dat.typ = "hist", k.x = 1, k.y = 1, inf.margin = 10, 
-    p.cex = 1, col.lev = 15, plot.grid = FALSE, x.adj = 0.5, 
-    x.padj = 3, y.las = 0, y.adj = 1, y.padj = 0, x.lim = c(0, 
-        0), y.lim = c(0, 0), x.lab = " ", y.lab = " ") 
+    lrm.col = "blue", pl.dat = FALSE, pl.dat.typ = "hist", k.x = 1, 
+    k.y = 1, inf.margin = 10, p.cex = 1, col.lev = 15, plot.grid = FALSE, 
+    x.adj = 0.5, x.padj = 3, y.las = 0, y.adj = 1, y.padj = 0, 
+    x.lim = c(0, 0), y.lim = c(0, 0), x.lab = " ", y.lab = " ") 
 {
     x.s.linlir <- x
     if (typ == "para") {
@@ -497,13 +497,13 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.grid = 500,
             if (!is.vector(x.s.linlir$f.lrm)) {
                 for (j in 1:nrow(x.s.linlir$f.lrm)) {
                   points(x.s.linlir$f.lrm[j, 2], x.s.linlir$f.lrm[j, 
-                    1], pch = 19, col = 4, cex = 1)
+                    1], pch = 19, col = lrm.col, cex = 1)
                 }
                 print("f.lrm is not unique !\n")
             }
             else {
                 points(x.s.linlir$f.lrm[2], x.s.linlir$f.lrm[1], 
-                  pch = 19, col = 4, cex = 1)
+                  pch = 19, col = lrm.col, cex = 1)
             }
         }
     }
@@ -550,7 +550,7 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.grid = 500,
                   for (j in 1:nrow(x.s.linlir$f.lrm)) {
                     curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$f.lrm[j, 
                       2] * x, x.min - x.d, x.max + x.d, add = T, 
-                      lty = 1, col = 4, lwd = 2)
+                      lty = 1, col = lrm.col, lwd = 2)
                   }
                 }
                 else {
@@ -564,7 +564,7 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.grid = 500,
                   for (j in 1:nrow(x.s.linlir$f.lrm)) {
                     curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$f.lrm[j, 
                       2] * x, x.min - x.d, x.max + x.d, add = T, 
-                      lty = 1, col = 4, lwd = 2)
+                      lty = 1, col = lrm.col, lwd = 2)
                   }
                 }
                 print("f.lrm is not unique !\n")
@@ -581,7 +581,7 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.grid = 500,
                     y.lab = y.lab)
                   curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
                     x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
-                    col = 4, lwd = 2)
+                    col = lrm.col, lwd = 2)
                 }
                 else {
                   plot(min(dat[, 1]), max(dat[, 4]), type = "n", 
@@ -593,7 +593,7 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.grid = 500,
                     padj = y.padj)
                   curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
                     x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
-                    col = 4, lwd = 2)
+                    col = lrm.col, lwd = 2)
                 }
             }
         }
@@ -637,14 +637,14 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.grid = 500,
                   for (j in 1:nrow(x.s.linlir$f.lrm)) {
                     curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$f.lrm[j, 
                       2] * x, x.min - x.d, x.max + x.d, add = T, 
-                      lty = 1, col = 4, lwd = 2)
+                      lty = 1, col = lrm.col, lwd = 2)
                   }
                   print("f.lrm is not unique !\n")
                 }
                 else {
                   curve(x.s.linlir$f.lrm[1] + x.s.linlir$f.lrm[2] * 
                     x, x.min - x.d, x.max + x.d, add = T, lty = 1, 
-                    col = 4, lwd = 2)
+                    col = lrm.col, lwd = 2)
                 }
             }
         }
@@ -653,20 +653,22 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.grid = 500,
                 for (j in 1:nrow(x.s.linlir$f.lrm)) {
                   curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$q.lrm + 
                     x.s.linlir$f.lrm[j, 2] * x, x.min - x.d, 
-                    x.max + x.d, add = T, lty = 2, col = 4, lwd = 2)
+                    x.max + x.d, add = T, lty = 2, col = lrm.col, 
+                    lwd = 2)
                   curve(x.s.linlir$f.lrm[j, 1] + x.s.linlir$q.lrm + 
                     x.s.linlir$f.lrm[j, 2] * x, x.min - x.d, 
-                    x.max + x.d, add = T, lty = 2, col = 4, lwd = 2)
+                    x.max + x.d, add = T, lty = 2, col = lrm.col, 
+                    lwd = 2)
                 }
                 print("f.lrm is not unique !\n")
             }
             else {
                 curve(x.s.linlir$f.lrm[1] + x.s.linlir$q.lrm + 
                   x.s.linlir$f.lrm[2] * x, x.min - x.d, x.max + 
-                  x.d, add = T, lty = 2, col = 4, lwd = 2)
+                  x.d, add = T, lty = 2, col = lrm.col, lwd = 2)
                 curve(x.s.linlir$f.lrm[1] - x.s.linlir$q.lrm + 
                   x.s.linlir$f.lrm[2] * x, x.min - x.d, x.max + 
-                  x.d, add = T, lty = 2, col = 4, lwd = 2)
+                  x.d, add = T, lty = 2, col = lrm.col, lwd = 2)
             }
         }
     }
@@ -688,7 +690,7 @@ function (x, ...)
         "% \n"))
 }
 s.linlir <-
-function (dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 100) 
+function (dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, a.grid = 100) 
 {
     if (class(dat.idf) != "idf") {
         stop("The data must be provided as an *idf* object !\n")
@@ -842,11 +844,11 @@ function (dat.idf, var = NULL, p = 0.5, bet, epsilon = 0, b.grid = 100)
     else {
         b.u <- floor(b.search[ind.bu] * 1e+09)/1e+09
     }
-    b.step <- (b.u - b.l)/(b.grid * 10 - 1)
+    b.step <- (b.u - b.l)/(a.grid * 10 - 1)
     b.range <- c(seq(b.l - b.step, b.u + b.step, b.step), b.l + 
         1e-16, b.u - 1e-16, ceiling(b.l * 1e+06)/1e+06, ceiling(b.l * 
         1000)/1000, floor(b.u * 1e+06)/1e+06, floor(b.u * 1000)/1000)
-    para <- undom.para(dat, b.range, b.grid, x.s.linlir$q.lrm, 
+    para <- undom.para(dat, b.range, a.grid, x.s.linlir$q.lrm, 
         p, bet, epsilon)
     x.s.linlir$a.undom <- round(para[[1]], 10)
     x.s.linlir$b.undom <- round(para[[2]], 10)
@@ -996,7 +998,7 @@ function (dat, b, q.lrm, p = 0.5, bet, epsilon = 0)
     list(result1, result2)
 }
 undom.para <-
-function (dat, b.range, b.grid = 100, q.lrm, p = 0.5, bet, epsilon = 0) 
+function (dat, b.range, a.grid = 100, q.lrm, p = 0.5, bet, epsilon = 0) 
 {
     n <- nrow(dat)
     b.pot <- b.range
@@ -1022,8 +1024,8 @@ function (dat, b.range, b.grid = 100, q.lrm, p = 0.5, bet, epsilon = 0)
                   a.undom[which(a.undom[, 1] == Inf), 1] <- 1e+09
                   a.undom[which(a.undom[, 2] == -Inf), 2] <- -1e+09
                   a.undom[which(a.undom[, 2] == Inf), 2] <- 1e+09
-                  if ((a.undom[[k, 2]] - a.undom[[k, 1]]) < (b.grid/20)) {
-                    k.grid <- round(b.grid/4)
+                  if ((a.undom[[k, 2]] - a.undom[[k, 1]]) < (a.grid/20)) {
+                    k.grid <- round(a.grid/4)
                     para.undom <- rbind(para.undom, matrix(c(seq(a.undom[[k, 
                       1]], a.undom[[k, 2]], (a.undom[[k, 2]] - 
                       a.undom[[k, 1]])/(k.grid - 1)), rep(b.pot[i], 
@@ -1031,8 +1033,8 @@ function (dat, b.range, b.grid = 100, q.lrm, p = 0.5, bet, epsilon = 0)
                   }
                   else {
                     if ((a.undom[[k, 2]] - a.undom[[k, 1]]) < 
-                      (b.grid/10)) {
-                      k.grid <- round(b.grid/2)
+                      (a.grid/10)) {
+                      k.grid <- round(a.grid/2)
                       para.undom <- rbind(para.undom, matrix(c(seq(a.undom[[k, 
                         1]], a.undom[[k, 2]], (a.undom[[k, 2]] - 
                         a.undom[[k, 1]])/(k.grid - 1)), rep(b.pot[i], 
@@ -1041,8 +1043,8 @@ function (dat, b.range, b.grid = 100, q.lrm, p = 0.5, bet, epsilon = 0)
                     else {
                       para.undom <- rbind(para.undom, matrix(c(seq(a.undom[[k, 
                         1]], a.undom[[k, 2]], (a.undom[[k, 2]] - 
-                        a.undom[[k, 1]])/(b.grid - 1)), rep(b.pot[i], 
-                        b.grid)), nrow = b.grid, ncol = 2))
+                        a.undom[[k, 1]])/(a.grid - 1)), rep(b.pot[i], 
+                        a.grid)), nrow = a.grid, ncol = 2))
                     }
                   }
                 }
