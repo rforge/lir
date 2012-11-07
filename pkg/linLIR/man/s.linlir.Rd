@@ -57,7 +57,7 @@ Argument of the generic function \code{plot}. Here \code{y=NULL}.
   \item{para.typ}{Options for plot of \code{typ="para"} are \code{"polygon"} (default) or \code{"points"} (approximation).
 }
   \item{b.grid}{
-Parameter for plot of \code{typ="para"} with default option \code{"polygon"}. \item{b.grid} is the number of points over the range of slope values at which the corresponding undominated intercept values are displayed.
+Parameter for plot of \code{typ="para"} with default option \code{"polygon"}. \code{b.grid} is the number of points over the range of slope values at which the corresponding undominated intercept values are displayed.
 }
   \item{nb.func}{Number of (randomly chosen) plotted undominated lines for plots of \code{typ="func"}.}
   \item{seed.func}{Set seed for the random selection of plotted regression lines for plots of \code{typ="func"}. (Optional)
