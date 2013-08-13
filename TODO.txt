@@ -1,6 +1,7 @@
 # ToDo for linLIR:
 
-- wenn R-Forge-Checks okay, zu CRAN submitten...
+- plot.s.linlir -> para -> polygon minimal geändert, sodass eine mögliche Offenheit bei 0 klarer sichtbar wird.
+
 
 - bei Gelegenheit hinzufügen:
 Option für Datenplot (plot.idf), die auf polygon() basiert, wo jeder Datenpunkt als halbtransparentes Polygon (ohne Rand!) gezeichnet wird

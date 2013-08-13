@@ -437,6 +437,9 @@ function (x, y = NULL, ..., typ, para.typ = "polygon", b.grid = 500,
             b.d <- inf.margin/100 * (x.max - x.min)
             b.pot <- seq(x.min - b.d, x.max + b.d, by = (x.max - 
                 x.min + 2 * b.d)/(b.grid - 1))
+            if (x.min <= 0 & x.max >= 0) {
+                b.pot <- sort(c(b.pot, -0.001, 0.001))
+            }
             n <- x.s.linlir$n
             k.l <- x.s.linlir$config$k.l
             a.l.plot <- matrix(NA, nrow = (n - k.l), ncol = length(b.pot))
