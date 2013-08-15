@@ -381,9 +381,9 @@ function (x, y = NULL, ..., var = NULL, typ = "hist", k.x = 1,
         Z <- rbind(Z, Z.image)
         tab <- ftable(round(Z[, 1], 10), round(Z[, 2], 10))
         max.tab <- max(tab)
-        image(X, Y, tab, col = gray((col.lev:0)/col.lev), xlim = c(X.min, 
-            X.max), ylim = c(Y.min, Y.max), zlim = c(1, max.tab), 
-            xlab = " ", ylab = " ", las = y.las)
+        image(X, Y, tab, col = gray(c(col.lev, round(0.8 * col.lev):0)/col.lev), 
+            xlim = c(X.min, X.max), ylim = c(Y.min, Y.max), zlim = c(1, 
+                max.tab), xlab = " ", ylab = " ", las = y.las)
         mtext(x.lab, side = 1, las = 1, adj = x.adj, padj = x.padj)
         mtext(y.lab, side = 2, las = y.las, adj = y.adj, padj = y.padj)
         if (plot.grid == TRUE) {
