@@ -965,6 +965,7 @@ function (dat, b, q.lrm, p = 0.5, bet, epsilon = 0)
         result2 <- "There is no undominated line with the chosen slope b!"
     }
     else {
+        a.undom <- round(a.undom, 10)
         a.undom <- unique(a.undom, MARGIN = 1)
         preresult2 <- a.undom[a.undom[, 1] <= a.undom[, 2], ]
         if (is.vector(preresult2) == T) {
