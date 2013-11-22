@@ -1,12 +1,13 @@
 # ToDo for linLIR:
 
-- plot.s.linlir -> para
+Dokumentation anpassen
+- plot.s.linlir -> para ->
 .option polygon: minimal geändert, sodass eine mögliche Offenheit bei 0 klarer sichtbar wird.
 .p.cex für Steuerung der Größe der LRM-Punkte eingefügt
 .pl.border hinzugefügt
+- plot.idf/ plot.s.linlir: linebreaks für plot(... ) 
+- alle: Referenzen aktualisieren!
 
-- Dokumentation anpassen, sodass bei plot-Funktionen Zeilenumbrüche da sind !!!
-Sonst gibt's Warnings
 
 - bei Gelegenheit hinzufügen:
 Option für Datenplot (plot.idf), die auf polygon() basiert, wo jeder Datenpunkt als halbtransparentes Polygon (ohne Rand!) gezeichnet wird
