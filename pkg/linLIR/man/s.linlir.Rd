@@ -14,9 +14,12 @@ s.linlir(dat.idf, var=NULL, p=0.5, bet, epsilon=0, a.grid=100)
 
 \method{print}{s.linlir}(x, ...)
 \method{summary}{s.linlir}(object, ...)
-\method{plot}{s.linlir}(x, y=NULL, ..., typ, para.typ="polygon", b.grid=500, nb.func=1000, 
+\method{plot}{s.linlir}(x, y=NULL, ..., typ, para.typ="polygon", b.grid=500, nb.func=1000,
+
 seed.func=NULL, pl.lrm=TRUE, pl.band=FALSE, lrm.col="blue", pl.dat=FALSE, pl.dat.typ="hist", 
+
 k.x=1, k.y=1, inf.margin=10, p.cex=1, col.lev=15, plot.grid=FALSE, x.adj=0.5, x.padj=3, 
+
 y.las=0, y.adj=1, y.padj=0,x.lim=c(0,0), y.lim=c(0,0), x.lab=" ", y.lab=" ")
 }
 \arguments{
