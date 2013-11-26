@@ -1,6 +1,13 @@
 # ToDo for linLIR:
 
-Dokumentation anpassen
+# Version 1.2:
+
+DESCRIPTION aktualisieren
+linLIRfunctions.R aktualisieren
+
+Dokumentation anpassen:
+- plot.idf und plot.s.linlir -> x.adj=0.5, x.padj=3, y.las=0, y.adj=1, y.padj=0, ersetzt durch
+graf=c(0.5,3,0,1,0), dessen Werte direkt als erstes in der Funktion zugeordnet werden
 - plot.s.linlir -> para ->
 .option polygon: minimal geändert, sodass eine mögliche Offenheit bei 0 klarer sichtbar wird.
 .p.cex für Steuerung der Größe der LRM-Punkte eingefügt
