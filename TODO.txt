@@ -2,6 +2,10 @@
 
 # Version 1.2:
 
+-Draft-Option für Datenplot (plot.idf) umstellen auf polygon() mit Zusatz-Option, 
+dass jeder Datenpunkt als halbtransparentes Polygon (ohne Rand!) gezeichnet wird
+
+-danach:
 DESCRIPTION aktualisieren
 linLIRfunctions.R aktualisieren
 
@@ -18,6 +22,4 @@ außerdem für typ="draft" 3 neue Parameter eingeführt rcx, pcx und lw
 - alle: Referenzen aktualisieren!
 
 
-- bei Gelegenheit hinzufügen:
-Option für Datenplot (plot.idf), die auf polygon() basiert, wo jeder Datenpunkt als halbtransparentes Polygon (ohne Rand!) gezeichnet wird
 
